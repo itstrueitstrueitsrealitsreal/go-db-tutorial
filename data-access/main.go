@@ -76,6 +76,22 @@ func main() {
 
 	fmt.Printf("Albums found: %v\n", albums)
 
+	// test update album
+	id, err = updateAlbum(1, Album{
+		Title:  "My Beautiful Dark Twisted Fantasy",
+		Artist: "Kanye West",
+		Price:  49.99,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Album %d updated.\n", id)
+	alb, err = albumByID(1)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Album after update: %v\n", alb)
+
 }
 
 // albumsByArtist queries for albums that have the specified artist
@@ -167,12 +183,13 @@ func viewAlbums() ([]Album, error) {
 	return albums, nil
 }
 
-// TODO
-// Implement updateAlbum, which updates the album with the specified ID with new attributes
+// updateAlbum updated the album with the specified ID with new attributes, returns the updated DB
+func updateAlbum(id int64, album Album) (int64, error) {
+	_, err := db.Query("UPDATE album SET title=?, artist=?, price=? WHERE id=?", album.Title, album.Artist,
+		album.Price, id)
+	if err != nil {
+		return 0, fmt.Errorf("updateAlbum %d: %v", id, err)
+	}
 
-// updateAlbum updated the album with the specified ID with new attributes
-func updateAlbum(id int64, album Album) ([]Album, error) {
-	var albums []Album
-
-	return albums, nil
+	return id, nil
 }
