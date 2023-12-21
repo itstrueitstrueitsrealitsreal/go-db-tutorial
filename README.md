@@ -3,7 +3,7 @@
 ## Description
 This is an implementation and extension of the sample program the tutorial on how to access a relational database using Go, featured in Go's documentation [here](https://go.dev/doc/tutorial/database-access).
 
-The example aims to model a collection of albums with the follwoing attributes, and offers basic CRUD functionality for the database.
+The example aims to model a collection of albums with the following attributes, and offers basic CRUD functionality for the database.
 
 The example models a database with the following schema:
 <img src="./data-access/ER-diagram.png"  width="60%" height="30%">
